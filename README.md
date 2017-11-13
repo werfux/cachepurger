@@ -1,4 +1,4 @@
-# Cache Purger - v 0.0.1
+# Cache Purger - v 0.0.4
 
 ## Introduction
 Cache Purger is a small (and simple?) commandline tool to run flush / purge of data based on different cache technologies.
@@ -15,6 +15,10 @@ Each command you can run is a wrapper for the custom clear command of each techn
     - ```redis-cli DEL ```
 - Varnish: wrapped CURL command like this:
     - ```curl -I -XBAN <VARNISH_HOST> -H 'X-Ban-Url: ^<ROUTE>' -H 'X-Ban-Host: <SITE_HOST>'```
+
+## Requirements
+
+You have to run Cache Purger in a PHP 7.x environment.
 
 ## Download
 
