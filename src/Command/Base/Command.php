@@ -50,7 +50,7 @@ class Command extends SymfonyCommand
             throw new RuntimeException('Required option "file" not configured.');
         }
 
-        $filePath = $input->getOption('file') ?? './purge.yml';
+        $filePath = realpath($input->getOption('file') ?? getcwd() . '/purge.yml');
 
         if (!file_exists($filePath)) {
             throw new RuntimeException('Cannot find source file. (Default: ./purge.yml)');
