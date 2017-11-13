@@ -1,7 +1,7 @@
 # Cache Purger - v 0.0.1
 
 ## Introduction
-Cache Purger is a small (and simple?) commandline tool to run flushing and pruging of data against different cache technologies.
+Cache Purger is a small (and simple?) commandline tool to run flush / purge of data based on different cache technologies.
 You can run this tool during you depployment to clear your caches in an easy way. 
 
 For example, if you use Akamai and Varnish to cache your site, and both caches have to be cleared after a deploy you can setup 2 simple
@@ -16,6 +16,13 @@ Each command you can run is a wrapper for the custom clear command of each techn
     - ```redis-cli DEL ```
 - Varnish: wrapped CURL command like this:
     - ```curl -I -XBAN <VARNISH_HOST> -H 'X-Ban-Url: ^<ROUTE>' -H 'X-Ban-Host: <SITE_HOST>'```
+
+## Download
+
+The easiest way to use Cache Purger is download the phar file and run your commands.
+
+[Download Page](https://github.com/werfux/cachepurger/wiki/Cache-Purger-Phar-Download)  
+
 
 ## Setup
 When you run Akamai purge commands for the first time the tool will ask you for your credentials. When all credentials a given this tool will write an "
