@@ -1,6 +1,6 @@
 {
     "name": "Cache Purger",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "Commandline tool to execute purging for different cache technologies.",
     "license": "MIT",
     "type": "project",
