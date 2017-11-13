@@ -37,6 +37,7 @@ class DomainCommand extends Command
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
+        parent::initialize($input, $output);
         $this->domain = $this->getDomain($input);
     }
 
@@ -63,5 +64,4 @@ class DomainCommand extends Command
 
         return $loadedDomain;
     }
-
 }
