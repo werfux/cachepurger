@@ -2,12 +2,11 @@
 
 ## Introduction
 Cache Purger is a small (and simple?) commandline tool to run flush / purge of data based on different cache technologies.
-You can run this tool during you depployment to clear your caches in an easy way. 
+You can run this tool during your deployment to clear your caches in an easy way. 
 
-For example, if you use Akamai and Varnish to cache your site, and both caches have to be cleared after a deploy you can setup 2 simple
-calls to run tha purging. 
+For example, if you use Akamai and Varnish to cache your site, both caches have to be cleared after a deployment. Both technologies are supported by this tool.
 
-Each command you can run is a wrapper for the custom clear command of each technology. Below you can find the commands that are exectued in the background.
+Each command you can run is a wrapper for the custom clear command of each technology. Below you can find the commands that are executed in the background.
 
 - Akamai: We call the CCU v3 API. For this technology no shell command exists.
 - Redis: wrapped commands are: 
@@ -25,21 +24,21 @@ The easiest way to use Cache Purger is download the phar file and run your comma
 
 
 ## Setup
-When you run Akamai purge commands for the first time the tool will ask you for your credentials. When all credentials a given this tool will write an "
+When you run Akamai purge commands for the first time the tool will ask you for your credentials. When all credentials a given, this tool will create an "
 .edgerc" file with the credentials in the same folder where Cache Purger is saved.
 
 ## Configuration
 Cache Purger requires/expects a configuration file, named purge.yml, the same directory. (You can specify a different location.)
-This file must be written in YAML notation. 
+This file must be written in [YAML notation](http://lzone.de/cheat-sheet/YAML). 
 
 Currently the following properties are supported:
 
 - domain **(required)**: This string value defines the domain you want to purge with Akamai or Varnish command.
-- routes **(required/optional)**: This is alist/array of routes you want to purge. For the Akamai command this is an required setting othe commands 
+- routes **(required/optional)**: This is a list/array of routes you want to purge. For the Akamai command, this is an required setting. Other commands 
 supporting a full purge.
-- varnish_hosts **(optinal)**: A list of Varnish hosts where you want tot trigger the purge request. You can ignore this setting if don't want to handle any 
+- varnish_hosts **(optinal)**: A list of Varnish hosts where you want to trigger the purge request. You can ignore this setting if you don't want to handle any 
 Varnish stuff.
-- redis_connections **(optinal)**: A list of settings to connect with Redis servers. You can ignore this setting if don't want to handle any 
+- redis_connections **(optinal)**: A list of settings to connect with Redis servers. You can ignore this setting if you don't want to handle any 
 Redis stuff. The connections are Objects with the following properties:
     - host **(required)**
     - port **(optinal| default: 6379)**
