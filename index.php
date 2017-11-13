@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+use Eloquent\Composer\Configuration\ConfigurationReader;
 use BC\Purger\Helper\RequirementsHelper;
 use BC\Purger\Command\AkamaiPurgeCommand;
 use BC\Purger\Command\AkamaiCredentialsCommand;
@@ -18,12 +19,16 @@ try {
     die();
 }
 
+// Read Meta Information
+$reader = new ConfigurationReader();
+$metaInformation = $reader->read('./composer.json');
+
 // Application
 $consoleApplication = new Application();
 
 // Bootstrap Application
-$consoleApplication->setName('Cache Purger');
-$consoleApplication->setVersion('v0.0.1');
+$consoleApplication->setName($metaInformation->name());
+$consoleApplication->setVersion(sprintf('v%s', $metaInformation->version()));
 
 // Register Commands
 $consoleApplication->add(new AkamaiPurgeCommand());
