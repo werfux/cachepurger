@@ -1,0 +1,24 @@
+{
+    "name": "Cache Purger",
+    "version": "0.0.1",
+    "description": "Commandline tool to execute purging for different cache technologies.",
+    "license": "MIT",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Thilo Habenreich",
+            "email": "thabenreich@chip.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "BC\\Purger\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/console": "^3.3",
+        "akamai-open/edgegrid-client": "^1.0",
+        "symfony/yaml": "^3.3",
+        "predis/predis": "^1.1"
+    }
+}
