@@ -73,9 +73,9 @@ class Command extends SymfonyCommand
      */
     private function getAbsoluteSourceFilePath(InputInterface $input)
     {
-        $filePath = trim($input->getOption('file')) ??  self::DEFAULT_SOURCE_FILE;
+        $filePath = $input->getOption('file') ??  self::DEFAULT_SOURCE_FILE;
 
-        if (empty($filePath)) {
+        if (empty(trim($filePath))) {
             $filePath = self::DEFAULT_SOURCE_FILE;
         }
 

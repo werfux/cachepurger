@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace BC\Purger\Command;
 
 
+use BC\Purger\Helper\AkamaiHelper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -104,7 +105,8 @@ class AkamaiCredentialsCommand extends Command
      */
     private function writeCredentialsFile($clientSecret, $akamaiHost, $accessToken, $clientToken)
     {
-        $fileHandle = fopen('./.edgerc', 'wb+');
+        $edgeRcFile = AkamaiHelper::getEdgeRcFilePath();
+        $fileHandle = fopen($edgeRcFile, 'wb+');
 
         fwrite($fileHandle,'[default]' . "\n");
         fwrite($fileHandle, sprintf('client_secret = "%s"' . "\n", $clientSecret));

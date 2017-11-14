@@ -64,11 +64,11 @@ class AkamaiService
           'headers' => ['Content-Type' => 'application/json']
         ]);
 
-        $responseBody = json_decode($postPurge->getBody());
-
         if ($postPurge->getStatusCode() !== 201) {
             throw new RuntimeException('Purge request was not succesful.');
         }
+
+        $responseBody = json_decode($postPurge->getBody()->getContents());
 
         return $responseBody;
     }
