@@ -50,7 +50,7 @@ class AkamaiCredentialsCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $question = new ConfirmationQuestion('This will create a new or overwrite an existing ./edgerc file. Do want to continue? (y/n): ', false, '/^(y|j)/i');
+        $question = new ConfirmationQuestion('This will create a new or overwrite an existing .edgerc file. Do want to continue? (y/n): ', false, '/^(y|j)/i');
 
         if ($this->questionHelper->ask($input, $output, $question)) {
             $this->executeCredentialsDialog($input, $output);

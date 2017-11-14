@@ -18,7 +18,7 @@ class AkamaiHelper
      */
     public static function getEdgeRcFilePath()
     {
-        return dirname(__DIR__, 2) . '/.edgerc';
+        return PathHelper::getRootDirectory() . '/.edgerc';
     }
 
     /**

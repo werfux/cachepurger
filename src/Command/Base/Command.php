@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace BC\Purger\Command\Base;
 
+use BC\Purger\Helper\PathHelper;
 use BC\Purger\Helper\RoutesHelper;
 use BC\Purger\Helper\SourceFileHelper;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
@@ -80,7 +81,7 @@ class Command extends SymfonyCommand
         }
 
         if (preg_match('/^\.\/(.*)$/', $filePath, $matches)) {
-            $rootDirectory = realpath(dirname(__DIR__, 3));
+            $rootDirectory = PathHelper::getRootDirectory();
             $filePath = sprintf('%s%s%s', $rootDirectory, DIRECTORY_SEPARATOR, $matches[1]);
         }
 
