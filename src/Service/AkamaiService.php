@@ -1,10 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace BC\Purger\Service;
 
 use Akamai\Open\EdgeGrid\Client;
-use BC\Purger\Exception\MalformedCredentialsException;
-use BC\Purger\Exception\MissingFileException;
 use BC\Purger\Helper\AkamaiHelper;
 use Symfony\Component\Console\Exception\RuntimeException;
 
@@ -38,7 +37,7 @@ class AkamaiService
     public function createClient()
     {
         if (AkamaiHelper::validEdgeRcFileExists()) {
-            return Client::createFromEdgeRcFile('default', getcwd() . '/.edgerc', [
+            return Client::createFromEdgeRcFile('default', AkamaiHelper::getEdgeRcFilePath(), [
                 'verify' => false
             ]);
         }

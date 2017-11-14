@@ -1,10 +1,12 @@
 <?php
+declare(strict_types=1);
 
 namespace BC\Purger\Command;
 
 
 use BC\Purger\Command\Base\DomainCommand;
 use BC\Purger\Exception\VarnishException;
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -65,7 +67,7 @@ class VarnishPurgeCommand extends DomainCommand
     private function executePurge(array $varnishHosts, array $routesCollection, bool $forceAll)
     {
         if (empty($routesCollection) && !$forceAll) {
-            throw new \Exception('Nothing to do. Set "--force-all" if you want to purge without specific routes.');
+            throw new RuntimeException('Nothing to do. Set "--force-all" if you want to purge without specific routes.');
         }
 
         $purgeOutput = '';
@@ -83,11 +85,11 @@ class VarnishPurgeCommand extends DomainCommand
 
     /**
      * @param $varnishHost
-     * @param $routesCollection
+     * @param array $routesCollection
      * @return string
      * @throws \Exception
      */
-    private function executeRoutesPurge($varnishHost, $routesCollection)
+    private function executeRoutesPurge($varnishHost, array $routesCollection)
     {
         $purgeOutput = '';
 

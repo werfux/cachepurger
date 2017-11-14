@@ -1,7 +1,7 @@
 <?php
-namespace BC\Purger\Model;
+declare(strict_types=1);
 
-use BC\Purger\Exception\MissingParameterException;
+namespace BC\Purger\Model;
 
 /**
  * Class RedisConnection

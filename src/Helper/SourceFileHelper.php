@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace BC\Purger\Helper;
 
@@ -14,6 +15,7 @@ class SourceFileHelper
     /**
      * @param $filePath
      * @return mixed
+     * @throws \Exception
      */
     public static function loadDomainFromFile($filePath)
     {
@@ -43,6 +45,7 @@ class SourceFileHelper
     /**
      * @param $filePath
      * @return mixed
+     * @throws \Exception
      */
     public static function loadRedisConnectionsFromFile($filePath)
     {

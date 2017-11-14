@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace BC\Purger\Command;
 
@@ -58,6 +59,7 @@ class AkamaiCredentialsCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @throws \Exception
      */
     private function executeCredentialsDialog(InputInterface $input, OutputInterface $output)
     {
@@ -102,7 +104,7 @@ class AkamaiCredentialsCommand extends Command
      */
     private function writeCredentialsFile($clientSecret, $akamaiHost, $accessToken, $clientToken)
     {
-        $fileHandle = fopen('./.edgerc', 'w+');
+        $fileHandle = fopen('./.edgerc', 'wb+');
 
         fwrite($fileHandle,'[default]' . "\n");
         fwrite($fileHandle, sprintf('client_secret = "%s"' . "\n", $clientSecret));

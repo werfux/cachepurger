@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace BC\Purger\Helper;
 
@@ -13,23 +14,31 @@ use BC\Purger\Exception\MissingFileException;
 class AkamaiHelper
 {
     /**
+     * @return string
+     */
+    public static function getEdgeRcFilePath()
+    {
+        return dirname(__DIR__, 2) . '/.edgerc';
+    }
+
+    /**
      * @return bool
      * @throws MalformedCredentialsException
      * @throws MissingFileException
      */
     public static function validEdgeRcFileExists()
     {
-        $edgeRcFile = getcwd() . '/.edgerc';
+        $edgeRcFile = self::getEdgeRcFilePath();
 
         if (!file_exists($edgeRcFile)) {
-            return FALSE;
+            return false;
         }
 
         if (!self::validateEdgeRcFile($edgeRcFile)) {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 
     /**
@@ -38,7 +47,7 @@ class AkamaiHelper
      */
     private static function validateEdgeRcFile($edgeRcFile)
     {
-        $edgeRcFileContent = parse_ini_file(getcwd() . '/.edgerc');
+        $edgeRcFileContent = parse_ini_file($edgeRcFile);
 
         if (empty($edgeRcFileContent)) {
             return false;
@@ -69,7 +78,8 @@ class AkamaiHelper
      * @param $edgeRcFileContent
      * @return bool
      */
-    private static function validateRequiredKeys($edgeRcFileContent) {
+    private static function validateRequiredKeys($edgeRcFileContent)
+    {
         if (!array_key_exists('client_secret', $edgeRcFileContent)) {
             return false;
         }

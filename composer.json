@@ -16,6 +16,7 @@
         }
     },
     "require": {
+        "roave/security-advisories": "dev-master",
         "symfony/console": "^3.3",
         "akamai-open/edgegrid-client": "^1.0",
         "symfony/yaml": "^3.3",
