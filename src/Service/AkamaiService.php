@@ -68,9 +68,7 @@ class AkamaiService
             throw new RuntimeException('Purge request was not succesful.');
         }
 
-        $responseBody = json_decode($postPurge->getBody()->getContents());
-
-        return $responseBody;
+        return json_decode($postPurge->getBody()->getContents());
     }
 
 }

@@ -1,4 +1,4 @@
-# Cache Purger - v 0.1.0
+# Cache Purger - v 0.1.1
 
 ## Introduction
 Cache Purger is a small (and simple?) commandline tool to run flush / purge of data based on different cache technologies.
