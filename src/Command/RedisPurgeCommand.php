@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace BC\Purger\Command;
 
@@ -43,7 +44,6 @@ class RedisPurgeCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
         try {
-            $redisConnections = $this->getRedisConnections();
             $forceAll = false;
             $redisDatabase = null;
             $redisPattern = null;
@@ -60,7 +60,7 @@ class RedisPurgeCommand extends Command
                 $redisPattern = $input->getOption('pattern');
             }
 
-            $resultOutput = $this->executePurge($redisConnections, $forceAll, $redisDatabase, $redisPattern);
+            $resultOutput = $this->executePurge($forceAll, $redisDatabase, $redisPattern);
             $output->writeln($resultOutput);
         } catch (\Exception $exception) {
             $output->writeln(sprintf('Redis Error: %s', $exception->getMessage()));
@@ -68,13 +68,15 @@ class RedisPurgeCommand extends Command
     }
 
     /**
-     * @param $redisConnections
      * @param $forceAll
      * @param $redisDatabase
      * @param $redisPattern
+     * @throws \Exception
      */
-    private function executePurge($redisConnections, $forceAll, $redisDatabase, $redisPattern)
+    private function executePurge($forceAll, $redisDatabase, $redisPattern)
     {
+        $redisConnections = $this->getRedisConnections();
+
         foreach ($redisConnections as $redisConnectionData) {
             $redisConnection = new RedisConnection($redisConnectionData);
             $redisService = new RedisService($redisConnection);

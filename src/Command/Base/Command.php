@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace BC\Purger\Command\Base;
 
@@ -16,6 +17,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class Command extends SymfonyCommand
 {
+    const DEFAULT_SOURCE_FILE = './purge.yml';
+
     /** @var string */
     protected $sourceFile;
 
@@ -50,14 +53,35 @@ class Command extends SymfonyCommand
             throw new RuntimeException('Required option "file" not configured.');
         }
 
-        $filePath = realpath($input->getOption('file') ?? getcwd() . '/purge.yml');
+        $filePath = $this->getAbsoluteSourceFilePath($input);
 
         if (!file_exists($filePath)) {
-            throw new RuntimeException('Cannot find source file. (Default: ./purge.yml)');
+            throw new RuntimeException(sprintf('Cannot find source file. (Default: %s)', self::DEFAULT_SOURCE_FILE));
         }
 
         if (!pathinfo($filePath, PATHINFO_EXTENSION) === 'yml') {
             throw new RuntimeException('Source file have to be a yaml file. (*.yml) ');
+        }
+
+        return $filePath;
+    }
+
+    /**
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @return string
+     * @throws \Exception
+     */
+    private function getAbsoluteSourceFilePath(InputInterface $input)
+    {
+        $filePath = $input->getOption('file') ??  self::DEFAULT_SOURCE_FILE;
+
+        if (empty(trim($filePath))) {
+            $filePath = self::DEFAULT_SOURCE_FILE;
+        }
+
+        if (preg_match('/^\.\/(.*)$/', $filePath, $matches)) {
+            $rootDirectory = realpath(dirname(__DIR__, 3));
+            $filePath = sprintf('%s%s%s', $rootDirectory, DIRECTORY_SEPARATOR, $matches[1]);
         }
 
         return $filePath;

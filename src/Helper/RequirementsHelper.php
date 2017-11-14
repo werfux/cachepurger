@@ -1,12 +1,5 @@
 <?php
-/**
- * cachepurger
- *
- * User: Thilo Habenreich
- * E-Mail: thabenreich@chip.de
- * Date: 13.11.2017
- * Time: 16:00
- */
+declare(strict_types=1);
 
 namespace BC\Purger\Helper;
 

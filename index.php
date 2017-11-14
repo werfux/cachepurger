@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -21,7 +22,7 @@ try {
 
 // Read Meta Information
 $reader = new ConfigurationReader();
-$metaInformation = $reader->read('./composer.json');
+$metaInformation = $reader->read(__DIR__ . '/composer.json');
 
 // Application
 $consoleApplication = new Application();

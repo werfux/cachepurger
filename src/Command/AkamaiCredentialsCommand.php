@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace BC\Purger\Command;
 
 
+use BC\Purger\Helper\AkamaiHelper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -58,6 +60,7 @@ class AkamaiCredentialsCommand extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @throws \Exception
      */
     private function executeCredentialsDialog(InputInterface $input, OutputInterface $output)
     {
@@ -102,7 +105,8 @@ class AkamaiCredentialsCommand extends Command
      */
     private function writeCredentialsFile($clientSecret, $akamaiHost, $accessToken, $clientToken)
     {
-        $fileHandle = fopen('./.edgerc', 'w+');
+        $edgeRcFile = AkamaiHelper::getEdgeRcFilePath();
+        $fileHandle = fopen($edgeRcFile, 'wb+');
 
         fwrite($fileHandle,'[default]' . "\n");
         fwrite($fileHandle, sprintf('client_secret = "%s"' . "\n", $clientSecret));
